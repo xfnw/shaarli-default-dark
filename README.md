@@ -4,6 +4,7 @@ a dark version of shaarli's default theme
 do you like dark reader's theme and want users of your shaarli to have the same
 experience without needing the extention? well this theme is for you
 
+![screenshot of theme](https://repository-images.githubusercontent.com/268833430/4451a200-a4c3-11ea-946a-4701e1b03fac)
 
 ## installation
 - install and configure [shaarli](https://github.com/shaarli/shaarli)
