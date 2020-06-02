@@ -1,0 +1,67 @@
+<div class="linklist-paging">
+  <div class="paging pure-g">
+    <div class="linklist-filters pure-u-1-3">
+      {if="$is_logged_in or !empty($action_plugin)"}
+        <span class="linklist-filters-text pure-u-0 pure-u-lg-visible">
+          {'Filters'|t}
+        </span>
+        {if="$is_logged_in"}
+        <a href="?visibility=private" title="{'Only display private links'|t}"
+           class="{if="$visibility==='private'"}filter-on{else}filter-off{/if}"
+        ><i class="fa fa-user-secret"></i></a>
+        <a href="?visibility=public" title="{'Only display public links'|t}"
+           class="{if="$visibility==='public'"}filter-on{else}filter-off{/if}"
+        ><i class="fa fa-globe"></i></a>
+        {/if}
+        <a href="?untaggedonly" title="{'Filter untagged links'|t}"
+           class={if="$untaggedonly"}"filter-on"{else}"filter-off"{/if}
+        ><i class="fa fa-tag"></i></a>
+        <a href="#" title="{'Select all'|t}"
+           class="filter-off select-all-button"
+        ><i class="fa fa-check-square-o"></i></a>
+        <a href="#" class="filter-off fold-all pure-u-lg-0" title="{'Fold all'|t}">
+          <i class="fa fa-chevron-up"></i>
+        </a>
+        {loop="$action_plugin"}
+          {$value.attr.class=isset($value.attr.class) ? $value.attr.class : ''}
+          {$value.attr.class=!empty($value.on) ? $value.attr.class .' filter-on' : $value.attr.class .' filter-off'}
+          <a
+            {loop="$value.attr"}
+              {$key}="{$value}"
+            {/loop}>
+            {$value.html}
+          </a>
+        {/loop}
+      {/if}
+    </div>
+
+
+    <div class="linklist-pages pure-u-1-3">
+      {if="$next_page_url"}
+        <a href="{$next_page_url}" class="paging_newer">
+          <i class="fa fa-arrow-circle-left"></i>
+        </a>
+      {/if}
+      {if="$page_max>1"}<span class="strong">{$page_current} / {$page_max}</span>{/if}
+      {if="$previous_page_url"}
+        <a href="{$previous_page_url}" class="paging_older">
+          <i class="fa fa-arrow-circle-right"></i>
+        </a>
+      {/if}
+
+    </div>
+
+    <div class="linksperpage pure-u-1-3">
+      <div class="pure-u-0 pure-u-lg-visible">{'Links per page'|t}</div>
+      <a href="?linksperpage=20">20</a>
+      <a href="?linksperpage=50">50</a>
+      <a href="?linksperpage=100">100</a>
+      <form method="GET" class="pure-u-0 pure-u-lg-visible">
+        <input type="text" name="linksperpage" placeholder="133">
+      </form>
+      <a href="#" class="filter-off fold-all pure-u-0 pure-u-lg-visible" title="{'Fold all'|t}">
+        <i class="fa fa-chevron-up"></i>
+      </a>
+    </div>
+  </div>
+</div>
