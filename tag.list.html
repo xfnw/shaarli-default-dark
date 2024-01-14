@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html{if="$language !== 'auto'"} lang="{$language}"{/if}>
 <head>
   {include="includes"}
 </head>
@@ -15,7 +15,7 @@
     <h2 class="window-title">{'Tag list'|t} - {$countTags} {'tags'|t}</h2>
     {if="!empty($search_tags)"}
       <p class="center">
-        <a href="?searchtags={$search_tags|urlencode}" class="pure-button pure-button-shaarli">
+        <a href="{$base_path}/?searchtags={$search_tags_url}" class="pure-button pure-button-shaarli">
           {'List all links with those tags'|t}
         </a>
       </p>
@@ -26,14 +26,14 @@
       <div class="pure-u-1 pure-u-lg-1-2">
         <form method="GET">
           <input type="hidden" name="do" value="taglist">
-          <input type="text" name="searchtags" placeholder="{'Filter by tag'|t}"
+          <input type="text" name="searchtags" aria-label="{'Filter by tag'|t}" placeholder="{'Filter by tag'|t}"
                  {if="!empty($search_tags)"}
                  value="{$search_tags}"
                  {/if}
           autocomplete="off" data-multiple data-autofirst data-minChars="1"
           data-list="{loop="$tags"}{$key}, {/loop}"
           >
-          <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+          <button type="submit" class="search-button" aria-label="{'Search'|t}"><i class="fa fa-search" aria-hidden="true"></i></button>
         </form>
       </div>
       <div class="pure-u-lg-1-4"></div>
@@ -47,17 +47,17 @@
 
     <div id="taglist" class="taglist-container">
       {loop="tags"}
-        <div class="tag-list-item pure-g" data-tag="{$key}">
+        <div class="tag-list-item pure-g" data-tag="{$key}" data-tag-url="{$tags_url.$key1}">
           <div class="pure-u-1">
             {if="$is_logged_in===true"}
-              <a href="#" class="delete-tag"><i class="fa fa-trash"></i></a>&nbsp;&nbsp;
-              <a href="?do=changetag&fromtag={$key|urlencode}" class="rename-tag">
-                <i class="fa fa-pencil-square-o {$key}"></i>
+              <a href="#" class="delete-tag" aria-label="{'Delete'|t}"><i class="fa fa-trash" aria-hidden="true"></i></a>&nbsp;&nbsp;
+              <a href="{$base_path}/admin/tags?fromtag={$tags_url.$key1}" class="rename-tag" aria-label="{'Rename tag'|t}">
+                <i class="fa fa-pencil-square-o {$key}" aria-hidden="true"></i>
               </a>
             {/if}
 
-            <a href="?addtag={$key|urlencode}" title="{'Filter by tag'|t}" class="count">{$value}</a>
-            <a href="?searchtags={$key|urlencode} {$search_tags|urlencode}" class="tag-link">{$key}</a>
+            <a href="{$base_path}/add-tag/{$tags_url.$key1}" title="{'Filter by tag'|t}" class="count">{$value}</a>
+            <a href="{$base_path}/?searchtags={$tags_url.$key1} {$search_tags_url}" class="tag-link">{$key}</a>
 
             {loop="$value.tag_plugin"}
               {$value}
@@ -66,7 +66,7 @@
           {if="$is_logged_in===true"}
             <div class="rename-tag-form pure-u-1">
               <input type="text" name="{$key}" value="{$key}" class="rename-tag-input" />
-              <a href="#" class="validate-rename-tag"><i class="fa fa-check"></i></a>
+              <a href="#" class="validate-rename-tag"><i class="fa fa-check" aria-hidden="true"></i></a>
             </div>
           {/if}
         </div>
