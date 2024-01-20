@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html{if="$language !== 'auto'"} lang="{$language}"{/if}>
 <head>
   {include="includes"}
 </head>
@@ -11,7 +11,7 @@
 {$ratioInput='7-12'}
 {$ratioInputMobile='1-8'}
 
-<form method="POST" action="#" name="configform" id="configform">
+<form method="POST" action="{$base_path}/admin/configure" name="configform" id="configform">
   <div class="pure-g">
     <div class="pure-u-lg-1-8 pure-u-1-24"></div>
     <div class="pure-u-lg-3-4 pure-u-22-24 page-form page-form-complete">
@@ -35,7 +35,7 @@
           <div class="form-label">
             <label for="titleLink">
               <span class="label-name">{'Home link'|t}</span><br>
-              <span class="label-desc">{'Default value'|t}: ?</span>
+              <span class="label-desc">{'Default value'|t}: {$base_path}/</span>
             </label>
           </div>
         </div>
@@ -49,7 +49,7 @@
         <div class="pure-u-lg-{$ratioLabel} pure-u-1">
           <div class="form-label">
             <label for="titleLink">
-              <span class="label-name">{'Theme'|t}</span>
+              <span class="label-name">{'Themes'|t}</span>
             </label>
           </div>
         </div>
@@ -68,12 +68,34 @@
             </select>
           </div>
         </div>
+        <div class="pure-u-lg-{$ratioLabel} pure-u-1">
+          <div class="form-label">
+            <label for="formatter">
+              <span class="label-name">{'Description formatter'|t}</span>
+            </label>
+          </div>
+        </div>
+        <div class="pure-u-lg-{$ratioInput} pure-u-1">
+          <div class="form-input">
+            <select name="formatter" id="formatter" class="align">
+              {loop="$formatter_available"}
+                <option value="{$value}"
+                  {if="$value===$formatter"}
+                    selected="selected"
+                  {/if}
+                >
+                  {$value|ucfirst}
+                </option>
+              {/loop}
+            </select>
+          </div>
+        </div>
       </div>
       <div class="pure-g">
         <div class="pure-u-lg-{$ratioLabel} pure-u-1">
           <div class="form-label">
             <label for="language">
-              <span class="label-name">{'Language'|t}</span>
+              <span class="label-name">{'Languages'|t}</span>
             </label>
           </div>
         </div>
@@ -199,8 +221,8 @@
       <div class="pure-g">
         <div class="pure-u-lg-{$ratioLabel} pure-u-{$ratioLabelMobile}">
           <div class="form-label">
-            <label for="hidePublicLinks">
-              <span class="label-name">{'Check updates'|t}</span><br>
+            <label for="updateCheck">
+              <span class="label-name">{'Check for updates'|t}</span><br>
               <span class="label-desc">{'Notify me when a new release is ready'|t}</span>
             </label>
           </div>
@@ -209,6 +231,22 @@
           <div class="form-input">
             <input type="checkbox" name="updateCheck" id="updateCheck"
                  {if="$enable_update_check"}checked{/if}/>
+          </div>
+        </div>
+      </div>
+      <div class="pure-g">
+        <div class="pure-u-lg-{$ratioLabel} pure-u-{$ratioLabelMobile}">
+          <div class="form-label">
+            <label for="retrieveDescription">
+              <span class="label-name">{'Automatically retrieve description for new bookmarks'|t}</span><br>
+              <span class="label-desc">{'Shaarli will try to retrieve the description from meta HTML headers'|t}</span>
+            </label>
+          </div>
+        </div>
+        <div class="pure-u-lg-{$ratioInput} pure-u-{$ratioInputMobile}">
+          <div class="form-input">
+            <input type="checkbox" name="retrieveDescription" id="retrieveDescription"
+                 {if="$retrieve_description"}checked{/if}/>
           </div>
         </div>
       </div>
@@ -232,7 +270,7 @@
         <div class="pure-u-lg-{$ratioLabel} pure-u-1">
           <div class="form-label">
             <label for="apiSecret">
-              <span class="label-name">{'API secret'|t}</span><br>
+              <span class="label-name">{'REST API secret'|t}</span><br>
             </label>
           </div>
         </div>
@@ -251,7 +289,7 @@
                 {if="! $gd_enabled"}
                   {'You need to enable the extension <code>php-gd</code> to use thumbnails.'|t}
                 {elseif="$thumbnails_enabled"}
-                  <a href="?do=thumbs_update">{'Synchronize thumbnails'|t}</a>
+                  <a href="{$base_path}/admin/thumbnails">{'Synchronize thumbnails'|t}</a>
                 {/if}
               </span>
             </label>

@@ -1,11 +1,13 @@
 <div class="shaarli-menu pure-g" id="shaarli-menu">
   <div class="pure-u-lg-0 pure-u-1">
     <div class="pure-menu">
+     <header role="banner">
       <a href="{$titleLink}" class="pure-menu-link shaarli-title" id="shaarli-title-mobile">
-        <img src="img/icon.png" width="16" height="16" class="head-logo" alt="" />
+        <i class="fa fa-shaarli" aria-hidden="true"></i>
         {$shaarlititle}
       </a>
-      <a href="#" class="menu-toggle" id="menu-toggle"><s class="bar"></s><s class="bar"></s></a>
+      </header>
+      <a href="#" class="menu-toggle" id="menu-toggle" aria-label="{'Menu'|t}"><s class="bar" aria-hidden="true"></s><s class="bar" aria-hidden="true"></s></a>
     </div>
   </div>
   <div class="pure-u-1">
@@ -13,30 +15,30 @@
       <ul class="pure-menu-list pure-u-lg-5-6 pure-u-1">
         <li class="pure-menu-item pure-u-0 pure-u-lg-visible">
           <a href="{$titleLink}" class="pure-menu-link shaarli-title" id="shaarli-title-desktop">
-            <img src="img/icon.png" width="16" height="16" class="head-logo" alt="" />
+            <i class="fa fa-shaarli" aria-hidden="true"></i>
             {$shaarlititle}
           </a>
         </li>
         {if="$is_logged_in || $openshaarli"}
           <li class="pure-menu-item">
-            <a href="?do=addlink" class="pure-menu-link" id="shaarli-menu-shaare">
-              <i class="fa fa-plus" ></i> {'Shaare'|t}
+            <a href="{$base_path}/admin/add-shaare" class="pure-menu-link" id="shaarli-menu-shaare">
+              <i class="fa fa-plus" aria-hidden="true"></i> {'Shaare'|t}
             </a>
           </li>
           <li class="pure-menu-item" id="shaarli-menu-tools">
-            <a href="?do=tools" class="pure-menu-link">{'Tools'|t}</a>
+            <a href="{$base_path}/admin/tools" class="pure-menu-link">{'Tools'|t}</a>
           </li>
         {/if}
         <li class="pure-menu-item" id="shaarli-menu-tags">
-          <a href="?do=tagcloud" class="pure-menu-link">{'Tag cloud'|t}</a>
+          <a href="{$base_path}/tags/cloud" class="pure-menu-link">{'Tag cloud'|t}</a>
         </li>
         {if="$thumbnails_enabled"}
           <li class="pure-menu-item" id="shaarli-menu-picwall">
-            <a href="?do=picwall{$searchcrits}" class="pure-menu-link">{'Picture wall'|t}</a>
+            <a href="{$base_path}/picture-wall?{function="ltrim($searchcrits, '&')"}" class="pure-menu-link">{'Picture wall'|t}</a>
           </li>
         {/if}
         <li class="pure-menu-item" id="shaarli-menu-daily">
-          <a href="?do=daily" class="pure-menu-link">{'Daily'|t}</a>
+          <a href="{$base_path}/daily" class="pure-menu-link">{'Daily'|t}</a>
         </li>
         {loop="$plugins_header.buttons_toolbar"}
           <li class="pure-menu-item shaarli-menu-plugin">
@@ -50,15 +52,15 @@
           </li>
         {/loop}
         <li class="pure-menu-item pure-u-lg-0 shaarli-menu-mobile" id="shaarli-menu-mobile-rss">
-            <a href="?do={$feed_type}{$searchcrits}" class="pure-menu-link">{'RSS Feed'|t}</a>
+            <a href="{$base_path}/feed/{$feed_type}?{$searchcrits}" class="pure-menu-link">{'RSS Feed'|t}</a>
         </li>
         {if="$is_logged_in"}
           <li class="pure-menu-item pure-u-lg-0 shaarli-menu-mobile" id="shaarli-menu-mobile-logout">
-            <a href="?do=logout" class="pure-menu-link">{'Logout'|t}</a>
+            <a href="{$base_path}/admin/logout" class="pure-menu-link">{'Logout'|t}</a>
           </li>
         {else}
           <li class="pure-menu-item pure-u-lg-0 shaarli-menu-mobile" id="shaarli-menu-mobile-login">
-            <a href="?do=login" class="pure-menu-link">{'Login'|t}</a>
+            <a href="{$base_path}/login" class="pure-menu-link">{'Login'|t}</a>
           </li>
         {/if}
       </ul>
@@ -67,27 +69,27 @@
           <li class="pure-menu-item" id="shaarli-menu-desktop-search">
             <a href="#" class="pure-menu-link subheader-opener"
                data-open-id="search"
-               id="search-button" title="{'Search'|t}">
-              <i class="fa fa-search"></i>
+               id="search-button" aria-label="{'Search'|t}" title="{'Search'|t}">
+              <i class="fa fa-search" aria-hidden="true"></i>
             </a>
           </li>
           <li class="pure-menu-item" id="shaarli-menu-desktop-rss">
-            <a href="?do={$feed_type}{$searchcrits}" class="pure-menu-link" title="{'RSS Feed'|t}">
-              <i class="fa fa-rss"></i>
+            <a href="{$base_path}/feed/{$feed_type}?{$searchcrits}" class="pure-menu-link" title="{'RSS Feed'|t}" aria-label="{'RSS Feed'|t}">
+              <i class="fa fa-rss" aria-hidden="true"></i>
             </a>
           </li>
           {if="!$is_logged_in"}
             <li class="pure-menu-item" id="shaarli-menu-desktop-login">
-              <a href="?do=login" class="pure-menu-link"
+              <a href="{$base_path}/login" class="pure-menu-link"
                  data-open-id="header-login-form"
-                 id="login-button" title="{'Login'|t}">
-                <i class="fa fa-user"></i>
+                 id="login-button" aria-label="{'Login'|t}" title="{'Login'|t}">
+                <i class="fa fa-user" aria-hidden="true"></i>
               </a>
             </li>
           {else}
             <li class="pure-menu-item" id="shaarli-menu-desktop-logout">
-              <a href="?do=logout" class="pure-menu-link" title="{'Logout'|t}">
-                <i class="fa fa-sign-out"></i>
+              <a href="{$base_path}/admin/logout" class="pure-menu-link" aria-label="{'Logout'|t}" title="{'Logout'|t}">
+                <i class="fa fa-sign-out" aria-hidden="true"></i>
               </a>
             </li>
           {/if}
@@ -97,43 +99,93 @@
   </div>
 </div>
 
-<div id="content" class="container">
+<main id="content" class="container" role="main">
   <div id="search" class="subheader-form searchform-block header-search">
-    <form method="GET" class="pure-form searchform" name="searchform">
-      <input type="text" tabindex="1" id="searchform_value" name="searchterm" placeholder="{'Search text'|t}"
+    <form method="GET" class="pure-form searchform" name="searchform" action="{$base_path}/">
+      <input type="text" id="searchform_value" name="searchterm" aria-label="{'Search text'|t}" placeholder="{'Search text'|t}"
              {if="!empty($search_term)"}
              value="{$search_term}"
              {/if}
       >
-      <input type="text" tabindex="2" name="searchtags" id="tagfilter_value" placeholder="{'Filter by tag'|t}"
+      <input type="text" name="searchtags" id="tagfilter_value" aria-label="{'Filter by tag'|t}" placeholder="{'Filter by tag'|t}"
              {if="!empty($search_tags)"}
              value="{$search_tags}"
              {/if}
       autocomplete="off" data-multiple data-autofirst data-minChars="1"
       data-list="{loop="$tags"}{$key}, {/loop}"
       >
-      <button type="submit" class="search-button"><i class="fa fa-search"></i></button>
+      <button type="submit" class="search-button" aria-label="{'Search'|t}"><i class="fa fa-search" aria-hidden="true"></i></button>
     </form>
   </div>
-  <div id="actions" class="subheader-form">
-    <div class="pure-g">
-      <div class="pure-u-1">
-        <a href="" id="actions-delete" class="button">{'Delete'|t}</a>
+
+  {if="$is_logged_in && $template === 'linklist'"}
+    <div id="actions" class="subheader-form">
+      <div class="pure-g">
+        <div class="pure-u-1">
+          <a href="" id="actions-delete" class="button">
+            <i class="fa fa-trash" aria-hidden="true"></i>
+            {'Delete'|t}
+          </a>&nbsp;
+          <a href="" class="actions-change-visibility button" data-visibility="public">
+            <i class="fa fa-globe" aria-hidden="true"></i>
+            {'Set public'|t}
+          </a>&nbsp;
+          <a href="" class="actions-change-visibility button" data-visibility="private">
+            <i class="fa fa-user-secret" aria-hidden="true"></i>
+            {'Set private'|t}
+          </a>&nbsp;
+          <a href="" class="subheader-opener button" data-open-id="bulk-tag-action-add">
+            <i class="fa fa-tag" aria-hidden="true"></i>
+            {'Add tags'|t}
+          </a>&nbsp;
+          <a href="" class="subheader-opener button" data-open-id="bulk-tag-action-delete">
+            <i class="fa fa-window-close" aria-hidden="true"></i>
+            {'Delete tags'|t}
+          </a>
+        </div>
       </div>
     </div>
-  </div>
+
+    {$addDelete=['add', 'delete']}
+    {loop="$addDelete"}
+      <div id="bulk-tag-action-{$value}" class="subheader-form">
+        <form class="pure-g" action="{$base_path}/admin/shaare/update-tags" method="post">
+          <div class="pure-u-1">
+            <span>
+              <input
+                type="text" name="tag" class="autofocus"
+                aria-label="{$value === 'add' ? t('Tag to add') : t('Tag to delete')}"
+                placeholder="{$value === 'add' ? t('Tag to add') : t('Tag to delete')}"
+                autocomplete="off" data-multiple data-autofirst data-minChars="1"
+                data-list="{loop="$tags"}{$key}, {/loop}"
+              >
+              <input type="hidden" name="action" value="{$value}" />
+              <input type="hidden" name="id" value="" />
+              <input type="hidden" name="token" value="{$token}" />
+            </span>&nbsp;
+            <a href="" class="button action">
+              <i class="fa fa-tag" aria-hidden="true"></i>
+              {$value === 'add' ? t('Add tag') : t('Delete tag')}
+            </a>&nbsp;
+            <a href="" class="subheader-opener button cancel" data-open-id="actions">{'Cancel'|t}</a>
+          </div>
+        </form>
+      </div>
+    {/loop}
+  {/if}
+
   {if="!$is_logged_in"}
     <form method="post" name="loginform">
       <div class="subheader-form header-login-form" id="header-login-form">
-        <input type="text" name="login" placeholder="{'Username'|t}" tabindex="3">
-        <input type="password" name="password" placeholder="{'Password'|t}" tabindex="5">
+        <input type="text" name="login" aria-label="{'Username'|t}" placeholder="{'Username'|t}" autocapitalize="off" >
+        <input type="password" name="password" aria-label="{'Password'|t}" placeholder="{'Password'|t}" >
         <div class="remember-me">
-          <input type="checkbox" name="longlastingsession" id="longlastingsession" tabindex="6" checked>
+          <input type="checkbox" name="longlastingsession" id="longlastingsession" checked>
           <label for="longlastingsession">{'Remember me'|t}</label>
         </div>
         <input type="hidden" name="token" value="{$token}">
         <input type="hidden" name="returnurl">
-        <input type="submit" value="Login" tabindex="7">
+        <input type="submit" value="Login">
       </div>
     </form>
   {/if}
@@ -171,12 +223,40 @@
   </div>
 {/if}
 
-{if="!empty($global_warnings) && $is_logged_in"}
-  <div class="pure-g pure-alert pure-alert-warning pure-alert-closable" id="shaarli-warnings-alert">
+{if="!empty($global_errors)"}
+  <div class="pure-g header-alert-message pure-alert pure-alert-error pure-alert-closable" id="shaarli-errors-alert">
+  <div class="pure-u-2-24"></div>
+    <div class="pure-u-20-24">
+      {loop="$global_errors"}
+        <p>{$value}</p>
+      {/loop}
+    </div>
+    <div class="pure-u-2-24">
+      <i class="fa fa-times pure-alert-close"></i>
+    </div>
+  </div>
+{/if}
+
+{if="!empty($global_warnings)"}
+  <div class="pure-g header-alert-message pure-alert pure-alert-warning pure-alert-closable" id="shaarli-warnings-alert">
     <div class="pure-u-2-24"></div>
     <div class="pure-u-20-24">
       {loop="global_warnings"}
         <p>{$value}</p>
+      {/loop}
+    </div>
+    <div class="pure-u-2-24">
+      <i class="fa fa-times pure-alert-close"></i>
+    </div>
+  </div>
+{/if}
+
+{if="!empty($global_successes)"}
+  <div class="pure-g header-alert-message new-version-message pure-alert pure-alert-success pure-alert-closable" id="shaarli-success-alert">
+    <div class="pure-u-2-24"></div>
+    <div class="pure-u-20-24">
+      {loop="$global_successes"}
+      <p>{$value}</p>
       {/loop}
     </div>
     <div class="pure-u-2-24">

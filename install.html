@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html{if="$language !== 'auto'"} lang="{$language}"{/if}>
 <head>
   {include="includes"}
 </head>
@@ -10,14 +10,14 @@
 {$ratioLabelMobile='7-8'}
 {$ratioInputMobile='1-8'}
 
-<form method="POST" action="#" name="installform" id="installform">
+<form method="POST" action="{$base_path}/install" name="installform" id="installform">
 <div class="pure-g">
   <div class="pure-u-lg-1-6 pure-u-1-24"></div>
   <div class="pure-u-lg-2-3 pure-u-22-24 page-form page-form-complete">
     <h2 class="window-title">{'Install Shaarli'|t}</h2>
 
     <div class="center">
-      {'It looks like it\'s the first time you run Shaarli. Please configure it.'|t}
+      <p>{'It looks like it\'s the first time you run Shaarli. Please configure it.'|t}</p>
     </div>
 
     <div class="pure-g">
@@ -30,7 +30,7 @@
       </div>
       <div class="pure-u-lg-{$ratioInput} pure-u-1">
         <div class="form-input">
-          <input type="text" name="setlogin" id="username">
+          <input type="text" name="setlogin" id="username" autocapitalize="off">
         </div>
       </div>
     </div>
@@ -69,7 +69,7 @@
       <div class="pure-u-lg-{$ratioLabel} pure-u-1">
         <div class="form-label">
           <label for="language">
-            <span class="label-name">{'Language'|t}</span>
+            <span class="label-name">{'Languages'|t}</span>
           </label>
         </div>
       </div>
@@ -127,7 +127,7 @@
       <div class="pure-u-lg-{$ratioLabel} pure-u-7-8">
         <div class="form-label">
           <label for="update">
-            <span class="label-name">{'Check updates'|t}</span><br>
+            <span class="label-name">{'Check for updates'|t}</span><br>
             <span class="label-desc">
               {'Notify me when a new release is ready'|t}
             </span>
@@ -163,6 +163,16 @@
   </div>
 </div>
 </form>
+
+<div class="pure-g">
+  <div class="pure-u-lg-1-6 pure-u-1-24"></div>
+  <div class="pure-u-lg-2-3 pure-u-22-24 page-form page-form-complete">
+    <h2 class="window-title">{'Server requirements'|t}</h2>
+
+    {include="server.requirements"}
+  </div>
+</div>
+
 {include="page.footer"}
 </body>
 </html>
